@@ -1,7 +1,7 @@
 {
     "app": {
         "port": 8000,
-        "key": "",
+        "key": "7e57d4a08ccb944e8e6f46c010af8a3f",
         "log": "console.log"
     },
     "db": {
@@ -10,6 +10,6 @@
         "name": "",
         "user": "",
         "pass": "",
-        "path": ":memory:"
+        "path": "database.sqlite"
     }
 }
