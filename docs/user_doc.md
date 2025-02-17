@@ -59,3 +59,63 @@ You receive the bearear token with accessToken key.
 ## The users endpoint
 
 Send the bearer token.
+
+* `Authorization: Bearer <token>`
+
+Endpoint: /api/users
+
+## Get all shipments
+
+Endpoint: /api/shipments
+
+## Create a shipment
+
+Send the bearer token.
+
+* `Authorization: Bearer <token>`
+
+Endpoint: /api/shipments
+
+Data example in JSON:
+
+```json
+{
+    "shipmentId": 1,
+    "sentDate": "2023-01-01",
+    "endDate": "2023-01-01",
+    "addressee": "joe",
+    "targetCity": "Budapest"
+}
+```
+
+## Update a shipment
+
+Send the bearer token.
+
+* `Authorization: Bearer <token>`
+
+Endpoint: /api/shipments/:id
+
+Example endpoint: /api/shipments/1
+
+Data example in JSON:
+
+```json
+{
+    "shipmentId": 1,
+    "sentDate": "2023-01-01",
+    "endDate": "2023-01-01",
+    "addressee": "joe",
+    "targetCity": "Budapest"
+}
+```
+
+## Delete a shipment
+
+Send the bearer token.
+
+* `Authorization: Bearer <token>`
+
+Endpoint: /api/shipments/:id
+
+Example endpoint: /api/shipments/1
