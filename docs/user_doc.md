@@ -29,6 +29,10 @@ All endpoint have a /api prefix.
 | /register | POST  | no |  create user |
 | /login    | POST  | no |  login  |
 | /users    | GET   | yes |  read users |
+| /shipments | GET | no | read shipments |
+| /shipments | POST | yes | create shipment |
+| /shipments | PUT | yes | update shipment |
+| /shipments | DELETE | yes | delete shipment |
 
 ## The register endpoint
 
