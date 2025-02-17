@@ -1,0 +1,107 @@
+import replace from 'replace';
+import fs from 'fs-extra';
+
+import fsp from 'fs/promises'
+import { generateApiKey } from 'generate-api-key'
+import path, { dirname } from 'path';
+import url from 'url';
+
+console.log(process.argv.length)
+console.log(process.argv[2])
+
+if(process.argv.length == 3 && process.argv[2] == 'key:generate') {
+  startGenerateKey();
+} else if(process.argv.length < 4) {
+  console.log('Usage:');
+  console.log('node op <command> <type> <name>');
+  console.log('Example:');
+  console.log('node op create model something');
+  console.log('node op create controller something');
+  console.log('node op key:generate');
+  process.exit(1);
+} else {
+  if(process.argv[2] === 'create') {
+    console.log('Create a new ' + process.argv[3] + '...');
+    if(process.argv[3] === 'model') {
+      copyModel();
+    }
+    if(process.argv[3] === 'controller') {
+      copyController();
+    }
+  }
+  if(process.argv[2] === 'key:generate') {
+    console.log('Genearete key ... ');
+    
+  }
+  
+}
+
+async function copyController() {
+
+  const className = process.argv[4]
+  const lowerName = className.toLowerCase()
+
+  const src = 'templates/controllerTemplate.js'
+  const dest = `app/controllers/${lowerName}controller.js`
+  await fs.copy(src, dest)
+
+  replace({
+      regex: 'Thing',
+      replacement: capitalizeFirstLetter(className),
+      paths: [dest]
+  })
+  replace({
+      regex: 'thing',
+      replacement: className,
+      paths: [dest]
+  })
+  replace({
+    regex: 'things',
+    replacement: className + 's',
+    paths: [dest]
+  })
+}
+
+async function copyModel() {
+
+  const className = process.argv[4]
+  const lowerName = className.toLowerCase()
+
+  const src = 'templates/modelTemplate.js'
+  const dest = `app/models/${lowerName}.js`
+  await fs.copy(src, dest)
+
+  replace({
+      regex: 'Thing',
+      replacement: capitalizeFirstLetter(className),
+      paths: [dest]
+  })
+  replace({
+      regex: 'thing',
+      replacement: className,
+      paths: [dest]
+  })
+}
+
+function capitalizeFirstLetter(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function generateKey(size = 32, format = 'base64') {
+  const buffer = crypto.randomBytes(size);
+  return buffer.toString(format);
+}
+
+function startGenerateKey() {
+  console.log('Generate key...');
+  const fileName = 'config/default.json'
+  fsp.readFile(fileName)
+      .then(body => JSON.parse(body))
+      .then(json => {
+          json.app.key = generateApiKey({method: 'bytes', length: 32})
+          return json
+      })
+      .then(json => JSON.stringify(json, null, 4))
+      .then(body => fs.writeFile(fileName, body, 'utf8'))
+      .catch(error => console.log(error))
+}
