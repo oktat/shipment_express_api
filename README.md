@@ -2,6 +2,10 @@
 
 Express based REST API with shipment data.
 
+## Data
+
+Contains both data and configuration files.
+
 ## Install
 
 ```cmd
