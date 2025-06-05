@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import config from '../../config/default.json' assert { type: 'json' }
+import config from '../../config/default.json' with { type: 'json' }
 
 if(config.app.log != false) {
     var log = console.log

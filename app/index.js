@@ -3,7 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import fs from 'fs'
 import router from './routes/api.js'
-import config from '../config/default.json' assert { type: 'json' }
+import config from '../config/default.json' with { type: 'json' }
 
 const app = express()
 
