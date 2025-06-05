@@ -8,8 +8,8 @@ const Shipment = sequelize.define('shipment', {
         primaryKey: true
     },
     shipmentId : { type: DataTypes.STRING,  allowNull: false, unique: true },
-    sentDate: { type: DataTypes.DATE,  allowNull: true },
-    endDate: { type: DataTypes.DATE,  allowNull: true },
+    sentDate: { type: DataTypes.DATEONLY,  allowNull: true },
+    endDate: { type: DataTypes.DATEONLY,  allowNull: true },
     addressee: { type: DataTypes.STRING,  allowNull: false },
     targetCity : { type: DataTypes.STRING,  allowNull: true }    
 })

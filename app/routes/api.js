@@ -11,8 +11,8 @@ router.post('/login', AuthController.login)
 router.get('/users', [verifyToken], UserController.index)
 
 router.get('/shipments', ShipmentController.index)
-router.post('/shipments', [verifyToken], ShipmentController.create)
-router.put('/shipments/:id', [verifyToken], ShipmentController.update)
-router.delete('/shipments/:id', [verifyToken], ShipmentController.delete)
+router.post('/shipments', ShipmentController.create)
+router.put('/shipments/:id', ShipmentController.update)
+router.delete('/shipments/:id', ShipmentController.delete)
 
 export default router
